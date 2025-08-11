@@ -57,7 +57,7 @@ The model is saved as `model2.pkl` for deployment in the Streamlit application.
 ├── diabetes_dataset.csv                      # The raw dataset
 ├── model2.pkl                                # The serialized trained model pipeline for the app
 ├── requirements.txt                          # Python dependencies for the project
-└── model.pkl                                 # An alternative model pipeline saved during experimentation
+
 ```
 
 ## How to Run Locally
