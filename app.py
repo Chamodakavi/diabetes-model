@@ -12,7 +12,7 @@ with open('model.pkl', 'rb') as f:
 
 
 # Load the dataset
-df = pd.read_csv('data\diabetes_dataset.csv')
+df = pd.read_csv('data/diabetes_dataset.csv')
 
 
 # Define the same features used during training
