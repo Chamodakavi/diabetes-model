@@ -7,12 +7,13 @@ from sklearn.metrics import classification_report, confusion_matrix
 import pickle
 
 # Load the model pipeline
-with open('model2.pkl', 'rb') as f:
+with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 
 # Load the dataset
-df = pd.read_csv('diabetes_dataset.csv')
+df = pd.read_csv('data\diabetes_dataset.csv')
+
 
 # Define the same features used during training
 selected_features = [
