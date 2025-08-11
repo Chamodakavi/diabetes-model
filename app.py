@@ -60,21 +60,79 @@ if sidebar == "Data Exploration":
 if sidebar == "Visualization":
     st.subheader("Data Visualizations")
     
+    # Glucose Level Distribution
     st.subheader("Glucose Level Distribution")
     fig, ax = plt.subplots()
     sns.histplot(df['Glucose'], kde=True, ax=ax)
     st.pyplot(fig)
     
+    # BMI Distribution
+    st.subheader("BMI Distribution")
+    fig, ax = plt.subplots()
+    sns.histplot(df['BMI'], kde=True, ax=ax)
+    st.pyplot(fig)
+
+    # BMI vs Age Scatter Plot
     st.subheader("BMI vs Age")
     fig, ax = plt.subplots()
     sns.scatterplot(x='Age', y='BMI', data=df, ax=ax)
     st.pyplot(fig)
-    
+
+    # Correlation Heatmap
     st.subheader("Correlation Heatmap")
     corr = df.corr()
     fig, ax = plt.subplots()
     sns.heatmap(corr, annot=True, cmap="coolwarm", ax=ax)
     st.pyplot(fig)
+
+    # Box Plot of Glucose vs Diabetes Outcome
+    st.subheader("Glucose Levels by Diabetes Outcome (Box Plot)")
+    fig, ax = plt.subplots()
+    sns.boxplot(x='Outcome', y='Glucose', data=df, ax=ax)
+    st.pyplot(fig)
+
+    # Violin Plot of Glucose by Diabetes Outcome
+    st.subheader("Glucose Distribution by Diabetes Outcome (Violin Plot)")
+    fig, ax = plt.subplots()
+    sns.violinplot(x='Outcome', y='Glucose', data=df, ax=ax)
+    st.pyplot(fig)
+
+    # Violin Plot of BMI by Diabetes Outcome
+    st.subheader("BMI Distribution by Diabetes Outcome (Violin Plot)")
+    fig, ax = plt.subplots()
+    sns.violinplot(x='Outcome', y='BMI', data=df, ax=ax)
+    st.pyplot(fig)
+
+    # Violin Plot of Age by Diabetes Outcome
+    st.subheader("Age Distribution by Diabetes Outcome (Violin Plot)")
+    fig, ax = plt.subplots()
+    sns.violinplot(x='Outcome', y='Age', data=df, ax=ax)
+    st.pyplot(fig)
+
+    # Violin Plot of Insulin by Diabetes Outcome
+    st.subheader("Insulin Distribution by Diabetes Outcome (Violin Plot)")
+    fig, ax = plt.subplots()
+    sns.violinplot(x='Outcome', y='Insulin', data=df, ax=ax)
+    st.pyplot(fig)
+    
+    # Feature Correlation Bar Plot with Outcome
+    st.subheader("Feature Correlation with Diabetes Outcome")
+    corr_df = pd.DataFrame({
+        'Feature': ['Glucose', 'BMI', 'Age', 'Insulin', 'BloodPressure', 'SkinThickness', 'Pregnancies', 'DiabetesPedigreeFunction'],
+        'Correlation with Outcome': [df['Glucose'].corr(df['Outcome']),
+                                     df['BMI'].corr(df['Outcome']),
+                                     df['Age'].corr(df['Outcome']),
+                                     df['Insulin'].corr(df['Outcome']),
+                                     df['BloodPressure'].corr(df['Outcome']),
+                                     df['SkinThickness'].corr(df['Outcome']),
+                                     df['Pregnancies'].corr(df['Outcome']),
+                                     df['DiabetesPedigreeFunction'].corr(df['Outcome'])]
+    }).sort_values(by='Correlation with Outcome', ascending=False)
+    
+    fig, ax = plt.subplots()
+    sns.barplot(data=corr_df, x='Correlation with Outcome', y='Feature', palette='coolwarm', ax=ax)
+    st.pyplot(fig)
+
 
 # -------------------
 # Model Prediction
