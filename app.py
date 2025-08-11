@@ -6,8 +6,11 @@ import seaborn as sns
 from sklearn.metrics import classification_report, confusion_matrix
 import joblib
 
-# Load model and dataset
-model = joblib.load('main.pkl')  # trained without SMOTE step in pipeline
+# Load the model pipeline
+model = joblib.load('model.pkl')
+
+
+# Load the dataset
 df = pd.read_csv('diabetes_dataset.csv')
 
 # Define the same features used during training
@@ -77,6 +80,7 @@ if sidebar == "Visualization":
 if sidebar == "Model Prediction":
     st.subheader("Enter Feature Values to Predict Diabetes")
     
+    # User input
     age = st.number_input("Age", min_value=20, max_value=100, value=30)
     bmi = st.number_input("BMI", min_value=0.0, max_value=100.0, value=25.0)
     glucose = st.number_input("Glucose", min_value=0.0, max_value=200.0, value=100.0)
@@ -120,15 +124,19 @@ if sidebar == "Model Prediction":
                               glucose_bad]],
                             columns=selected_features)
 
+    # Predict when the button is pressed
     if st.button("Predict"):
+        # Make prediction
         prediction = model.predict(input_df)[0]
         probability = model.predict_proba(input_df)[0][1]
 
+        # Display the result
         if prediction == 1:
             st.write("**Prediction:** Diabetes")
         else:
             st.write("**Prediction:** No Diabetes")
 
+        # Show the confidence of the prediction
         st.write(f"Prediction Confidence: {probability * 100:.2f}%")
 
 # -------------------
