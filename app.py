@@ -4,10 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import classification_report, confusion_matrix
-import joblib
+import pickle
 
 # Load the model pipeline
-model = joblib.load('model.pkl')
+with open('model2.pkl', 'rb') as f:
+    model = pickle.load(f)
 
 
 # Load the dataset
